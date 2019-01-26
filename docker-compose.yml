@@ -1,0 +1,58 @@
+version: '3.3'
+secrets:
+  jenkins-pass:
+    file: ./jenkins-pass
+  jenkins-user:
+    file: ./jenkins-user
+services: 
+  # springboot:
+    # build:
+    #   context: ./
+    #   dockerfile: Dockerfile.Springboot 
+    #   args:
+    #     url: https://github.com/beatlm/recipesBackEnd.git
+    #     project: recipesBackEnd
+    #     artifactid: recipes
+    #     version: 0.0.1
+    # container_name: recipes-api
+    # ports: 
+    #   - 8081:8080
+    # image: recipes-api
+    # environment:
+    #   - MONGO_DB_URI=mongodb://beatlm:beatlm@ds123029.mlab.com:23029/tmrecipes
+    #   - MONGO_DB_NAME=tmrecipes
+  # jenkins:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile.Jenkins
+  #   container_name: jenkins
+  #   image: jenkins  
+  #   ports:
+  #     - 8080:8080
+  #     - 50000:50000
+  #   secrets:
+  #     - jenkins-user
+  #     - jenkins-pass
+
+  angular:
+    build:
+      context: ./
+      dockerfile: Dockerfile.Angular
+      args:
+        url: https://github.com/beatlm/angular7.git
+        project: angular7
+        package: /app/tm-recipes-front/package*.json
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    container_name: angular7
+    ports:
+      - 42000:42000
+    image: angular7
+
+
+      
+
+
+
+
